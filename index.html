@@ -17,137 +17,16 @@ limitations under the License.
 <head>
   <meta charset="UTF-8">
   <title>auto_piano&visual</title>
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
   <!-- Header -->
   <div id="container">
-    <div class="header">Performance RNN</div>
-    <div id="status">Loading...</div>
-    <div id="controls" class="hidden">
-      <div class="control" style="margin-right: 20px;">
-        Conditioning<br />
-        <input type="radio" name="conditioning" id="conditioning-on">
-        On<br />
-        <input type="radio" name="conditioning" id="conditioning-off" checked>
-        Off
-      </div>
-      <div id="conditioning-controls">
-        <div class="control" style="margin-right: 20px;">
-          <div class="conditional">
-              Note Density (<span id="note-density-display"></span>)<br/>
-              <input type="range" min="0" max="6" value="2" id="note-density"><br />
-          </div>
+    <canvas id="Canvas"></canvas>
+    <a id="btn_start" href="javascript:void(0)">Start</a>
+  </div>
+  <div id="loading">
 
-          Gain (<span id="gain-display"></span>%)<br>
-          <input type="range" id="gain" min=0 max=200 value=25></input>
-        </div>
-        <div class="control">
-          <div class="conditional">
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-c" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-c" type="number" min="0" value="2">
-              <br/>
-              C
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-cs" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-cs" type="number" min="0" value="0">
-              <br/>
-              C#
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-d" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-d" type="number" min="0" value="1">
-              <br/>
-              D
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-ds" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-ds" type="number" min="0" value="0">
-              <br/>
-              D#
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-e" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-e" type="number" min="0" value="1">
-              <br/>
-              E
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-f" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-f" type="number" min="0" value="1">
-              <br/>
-              F
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-fs" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-fs" type="number" min="0" value="0">
-              <br/>
-              F#
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-g" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-g" type="number" min="0" value="1">
-              <br/>
-              G
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-gs" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-gs" type="number" min="0" value="0">
-              <br/>
-              G#
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-a" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-a" type="number" min="0" value="1">
-              <br/>
-              A
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-as" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-as" type="number" min="0" value="0">
-              <br/>
-              A#
-            </div>
-            <div class="control">
-              <div class="histogram-bucket"><div id="hist-b" class="histogram-value"></div></div>
-              <input class="pitch ui-condition" id="pitch-b" type="number" min="0" value="1">
-              <br/>
-              B
-            </div>
-            <br />
-            <input type="button" value="C Major" id="c-major" class="ui-condition">
-            <input type="button" value="F Major" id="f-major" class="ui-condition">
-            <input type="button" value="D Minor" id="d-minor" class="ui-condition">
-            <input type="button" value="Whole Tone" id="whole-tone" class="ui-condition">
-            <input type="button" value="Pentatonic" id="pentatonic" class="ui-condition">
-            <input type="button" value="Preset 1" id="preset-1" class="ui-condition">
-            <input type="button" value="Preset 2" id="preset-2" class="ui-condition">
-            <br />
-            <input type="button" value="Save Preset 1" id="save-1" class="ui-condition">
-            <input type="button" value="Save Preset 2" id="save-2" class="ui-condition">
-          </div>
-          <div id="midi-in-container">
-            midi in <select id="midi-in"><option value="none">none</option></select>
-          </div>
-          <div id="midi-out-container">
-              midi out <select id="midi-out"><option value="none">none</option></select>
-            </div>
-        </div>
-      </div>
-
-      <div class="control" style="margin-right: 20px;">
-        <input type="button" value="Reset RNN" id="reset-rnn">
-      </div>
-    </div>
-    <div id="keyboard" class="hidden"></div>
-    <div id="resettingText" style="opacity: 0">
-      Resetting...
-    </div>
-    <div class="text-block">
-      <a href="https://magenta.tensorflow.org/performance-rnn">Performance RNN</a> was trained in TensorFlow on MIDI from piano performances. It was then ported to run in the browser using only Javascript in the <a href="https://js.tensorflow.org/">TensorFlow.js</a> environment. Piano samples are from <a href="https://archive.org/details/SalamanderGrandPianoV3">Salamander Grand Piano</a>.
-    </div>
-    <a href="https://magenta.tensorflow.org/"><img class="image" sizes="128px" src="images/magenta-logo-bottom-text2.png" srcset="images/magenta-logo-bottom-text2.png 500w, images/magenta-logo-bottom-text2.png 640w" width="128"></a>
   </div>
 
   <!-- Footer -->

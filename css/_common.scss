@@ -1,0 +1,41 @@
+body {
+  overflow: hidden;
+}
+
+#container {
+  text-align: center;
+  background-color: #000;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+#btn_start {
+  box-sizing: border-box;
+  position: absolute;
+  top: calc(50% - 20px);
+  color: #9066C6;
+  border: 1px solid #9066C6;
+  padding: 10px 10px;
+  font-size: 18px;
+  height: 40px;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #9066C6;
+    color: #fff;
+  }
+  &.close {
+    display: none;
+  }
+}
+#Canvas {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+#loading {
+
+}
+
