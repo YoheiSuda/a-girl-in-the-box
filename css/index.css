@@ -109,5 +109,8 @@ table {
 #loading p {
   color: #00ff00;
 }
+#loading .random-loading {
+  position: absolute;
+}
 
 /*# sourceMappingURL=index.css.map */

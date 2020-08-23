@@ -117,13 +117,7 @@ export default function () {
                     break;
             }
             loading.insertAdjacentHTML('beforeend', '<p>progress:' + (Math.round(100.0 * progress.loaded / progress.total)) + '%...</p>');
-            if (progress.loaded / progress.total === 1) {
-                setTimeout(function () {
-                        performance_rnn()
-                        loading.classList.remove('on');
-                    }, 1000
-                )
-            }
+            loading.insertAdjacentHTML('beforeend', '<p class="random-loading" style="top: '+ (Math.random() * 100) +'%; left: '+ (Math.random() * 100) +'%">Loading...</p>');
         },
 
         // called when loading has errors
@@ -181,6 +175,7 @@ export default function () {
     const clock = new THREE.Clock();
     let noteNum = 0;
     let rot = 0;
+    let vrmFirstCheck = false;
 
     function animate() {
 
@@ -195,6 +190,13 @@ export default function () {
             currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.Chest).rotation.x = s * 0.1;
 
             currentVrm.update(deltaTime);
+
+            if (vrmFirstCheck === false) {
+                performance_rnn()
+                loading.classList.remove('on');
+                vrmFirstCheck = true;
+            }
+
         }
 
         group.rotation.y = clock.elapsedTime * 0.1;
