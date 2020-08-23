@@ -22,7 +22,7 @@ export default function () {
     const scene = new THREE.Scene();
 
     // light
-    const light = new THREE.SpotLight(0xFFFFFF, 1.5, 100, Math.PI, 1);
+    const light = new THREE.SpotLight(0xFFFFFF, 5, 100, Math.PI, 1);
     ;
     light.position.set(1.0, 1.0, 1.0).normalize();
     light.castShadow = true;
