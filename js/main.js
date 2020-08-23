@@ -1,12 +1,12 @@
-import performance_rnn from "./performance_rnn";
 import vrmDisplay from "./vrmDisplay";
 
 const btnStart = document.getElementById("btn_start");
+const loading = document.getElementById("loading");
 
 btnStart.addEventListener("click", function () {
-    //performance_rnn()
+    loading.classList.add("on");
     vrmDisplay()
-    btnStart.classList.add("close")
+    btnStart.classList.add("close");
 });
 
 

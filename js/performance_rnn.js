@@ -63,7 +63,7 @@ export default function () {
     const MAX_MIDI_PITCH = 127;
     const VELOCITY_BINS = 32;
     const MAX_SHIFT_STEPS = 100;
-    const STEPS_PER_SECOND = 100;
+    const STEPS_PER_SECOND = 50;
 
     const MIDI_EVENT_OFF = 0x80;
 
@@ -159,16 +159,16 @@ export default function () {
         generateStep(currentLoopId);
     }
 
-    const densityControl = 4;
+    const densityControl = 1;
 
-    const gainSliderElement = 25;
+    const gainSliderElement = 50;
 
     let globalGain = +gainSliderElement;
 
 
 //const notes = ['c', 'cs', 'd', 'ds', 'e', 'f', 'fs', 'g', 'gs', 'a', 'as', 'b'];
 
-    const pitchHistogramElements = [1, 2, 0, 2, 0, 1, 2, 0, 2, 0, 2, 0]; //ロクリアンスケール
+    const pitchHistogramElements = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
     function updateConditioningParams() {
         const pitchHistogram = pitchHistogramElements
@@ -298,6 +298,7 @@ export default function () {
                 if (eventType === 'note_on') {
                     const noteNum = index - offset;
                     console.log(noteNum)
+                    localStorage.setItem("noteNum",""+noteNum);
                     activeNotes.set(noteNum, currentPianoTimeSec);
 
                     return piano.keyDown(
@@ -369,4 +370,3 @@ export default function () {
     setTimeout(resetRnnRepeatedly, RESET_RNN_FREQUENCY_MS);
 
 }
-

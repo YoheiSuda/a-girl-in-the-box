@@ -2,23 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3accce56-f449-440a-8274-0bf35bac533c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/_common.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/_reset.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/performance_rnn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/vrmDisplay.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/shibu_dark.vrm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/_loading.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/magenta-logo-bottom-text2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/_common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/_common.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/_reset.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/_reset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/index.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/css/index.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/css/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/performance_rnn.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/performance_rnn.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/performance_rnn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/vrmDisplay.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vrmDisplay.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +83,8 @@
       <updated>1597567179755</updated>
       <workItem from="1597567181005" duration="6534000" />
       <workItem from="1597618918841" duration="3524000" />
-      <workItem from="1598071582209" duration="17873000" />
+      <workItem from="1598071582209" duration="17999000" />
+      <workItem from="1598150824451" duration="13077000" />
     </task>
     <servers />
   </component>

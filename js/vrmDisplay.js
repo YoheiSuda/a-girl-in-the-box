@@ -1,13 +1,9 @@
 import * as THREE from 'three';
-import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {EffectComposer} from "three/examples/jsm/postprocessing/EffectComposer";
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {VRM, VRMUtils, VRMSchema} from '@pixiv/three-vrm';
-import {RenderPass} from "three/examples/jsm/postprocessing/RenderPass";
-import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass";
-import {CopyShader} from "three/examples/jsm/shaders/CopyShader";
-import {FilmPass} from "three/examples/jsm/postprocessing/FilmPass";
 import {AdditiveBlending} from "three";
+
+import performance_rnn from "./performance_rnn";
 
 // tslint:disable-next-line:no-require-import
 
@@ -18,37 +14,25 @@ export default function () {
         canvas: document.querySelector("#Canvas")
     });
 
-    //composer
-    const composer = new EffectComposer(renderer);
-
     // camera
     const camera = new THREE.PerspectiveCamera(30.0, window.innerWidth / window.innerHeight, 0.1, 20.0);
     camera.position.set(5.0, 5.0, 5.0);
 
-    // camera controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.screenSpacePanning = true;
-    controls.target.set(0.0, 0.0, 0.0);
-    controls.update();
-
     // scene
     const scene = new THREE.Scene();
 
-    //renderpass
-    const renderPass = new RenderPass(scene, camera);
-    // let effectFilm = new FilmPass(0.8, 0.325, 256, false);
-    // effectFilm.renderToScreen = true;
-    composer.addPass(renderPass);
-    // composer.addPass(effectFilm);
-
     // light
-    const light = new THREE.DirectionalLight(0xffffff);
+    const light = new THREE.SpotLight(0xFFFFFF, 1.5, 100, Math.PI, 1);
+    ;
     light.position.set(1.0, 1.0, 1.0).normalize();
+    light.castShadow = true;
     scene.add(light);
 
     // gltf and vrm
     let currentVrm = undefined;
     const loader = new GLTFLoader();
+    const loading = document.getElementById("loading");
+    const loadingText = document.getElementById("loading_text");
     loader.crossOrigin = 'anonymous';
     loader.load(
         // URL of the VRM you want to load
@@ -114,57 +98,77 @@ export default function () {
             });
 
         },
-
         // called while loading is progressing
-        (progress) => console.log('Loading model...', 100.0 * (progress.loaded / progress.total), '%'),
+        (progress) => {
+            let loadingBar = loadingText.textContent.slice(-1);
+            console.log(loadingBar);
+            switch (loadingBar) {
+                case "|":
+                    loadingText.textContent = loadingText.textContent.replace("|", "/");
+                    break;
+                case "/":
+                    loadingText.textContent = loadingText.textContent.replace("/", "-");
+                    break;
+                case "-":
+                    loadingText.textContent = loadingText.textContent.replace("-", "\\");
+                    break;
+                case "\\":
+                    loadingText.textContent = loadingText.textContent.replace("\\", "|");
+                    break;
+            }
+            loading.insertAdjacentHTML('beforeend', '<p>progress:' + (Math.round(100.0 * progress.loaded / progress.total)) + '%...</p>');
+            if (progress.loaded / progress.total === 1) {
+                setTimeout(function () {
+                        performance_rnn()
+                        loading.classList.remove('on');
+                    }, 1000
+                )
+            }
+        },
 
         // called when loading has errors
         (error) => console.error(error)
     );
 
     // helpers
-    const gridHelper = new THREE.GridHelper(10, 10);
-    scene.add(gridHelper);
-
-    const axesHelper = new THREE.AxesHelper(5);
-    scene.add(axesHelper);
+    // const gridHelper = new THREE.GridHelper(10, 10);
+    // scene.add(gridHelper);
+    //
+    // const axesHelper = new THREE.AxesHelper(5);
+    // scene.add(axesHelper);
 
     const group = new THREE.Group();
     scene.add(group);
 
-    const Box = new THREE.BoxBufferGeometry(3, 3, 3);
-    const boxMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        opacity: 0.1,
-        transparent: true,
-        blending: THREE.AdditiveBlending
-    });
+    const Box = new THREE.BoxBufferGeometry(2, 2, 2);
     const edges = new THREE.EdgesGeometry(Box);
     const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
-        color: 0xffffff
+        color: 0xffffff,
+        transparent: true,
+        blending: AdditiveBlending
     }))
-    const cube = new THREE.Mesh(Box, boxMaterial);
-    group.add(cube);
     group.add(line);
 
 
     // spheres
     let spheres = [];
     const sphere = new THREE.SphereBufferGeometry(0.1, 32, 16);
-    const sphereMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        blending: AdditiveBlending,
-        opacity: 0.5
-    });
 
-    for (var i = 0; i < 500; i++) {
+
+    for (let i = 0; i < 88; i++) {
+        let sphereMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent: true,
+            blending: AdditiveBlending,
+            opacity: 0.5
+        });
 
         let sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
+        sphereMesh.castShadow = true;
 
-        sphereMesh.position.x = Math.random() * 10 - 5;
-        sphereMesh.position.y = Math.random() * 10 - 5;
-        sphereMesh.position.z = Math.random() * 10 - 5;
+        sphereMesh.position.x = Math.random() * 5 - 2.5;
+        sphereMesh.position.y = Math.random() * 5 - 2.5;
+        sphereMesh.position.z = Math.random() * 5 - 2.5;
 
         sphereMesh.scale.x = sphereMesh.scale.y = sphereMesh.scale.z = Math.random() * 3 + 1;
 
@@ -175,6 +179,8 @@ export default function () {
     }
 
     const clock = new THREE.Clock();
+    let noteNum = 0;
+    let rot = 0;
 
     function animate() {
 
@@ -193,17 +199,28 @@ export default function () {
             currentVrm.update(deltaTime);
         }
 
-        for (let i = 0, il = spheres.length; i < il; i++) {
+        rot += 0.1;
+        const radian = (rot * Math.PI) / 180;
+        camera.position.x = 5 * Math.sin(radian);
+        camera.position.y = 5 * Math.cos(radian);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-            let sphere = spheres[i];
+        let noteNum_tmp = parseInt(localStorage.getItem("noteNum"));
 
-            sphere.position.x = 5 * Math.cos(clock.elapsedTime * 0.1 + i);
-            sphere.position.y = 5 * Math.sin(clock.elapsedTime * 0.1 + i * 1.1);
-
+        if (noteNum !== noteNum_tmp) {
+            noteNum = noteNum_tmp - 21;
         }
 
-        composer.render();
+        console.log(noteNum);
 
+        if (spheres[noteNum].material !== undefined) {
+            spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
+            spheres[noteNum].scale.x = spheres[noteNum].scale.y = spheres[noteNum].scale.z = Math.random() * 3 + 1;
+            spheres[noteNum].position.x = 3 * Math.cos(clock.elapsedTime * 0.1 * (noteNum - 43.5));
+            spheres[noteNum].position.y = 3 * Math.sin(clock.elapsedTime * 0.1 * (noteNum - 43.5));
+        }
+
+        renderer.render(scene, camera);
     }
 
     animate();
