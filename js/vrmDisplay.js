@@ -193,11 +193,12 @@ export default function () {
             currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.LeftEye).rotation.y = s;
             currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.RightEye).rotation.y = s;
             currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.Chest).rotation.x = s * 0.1;
-            group.rotation.y = clock.elapsedTime * 0.1;
-            group.rotation.x = clock.elapsedTime * 0.1;
 
             currentVrm.update(deltaTime);
         }
+
+        group.rotation.y = clock.elapsedTime * 0.1;
+        group.rotation.x = clock.elapsedTime * 0.1;
 
         rot += 0.1;
         const radian = (rot * Math.PI) / 180;
