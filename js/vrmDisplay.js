@@ -207,11 +207,11 @@ export default function () {
 
         let noteNum_tmp = parseInt(localStorage.getItem("noteNum"));
 
-        if (noteNum !== noteNum_tmp) {
+        if (noteNum_tmp !== null && noteNum !== noteNum_tmp) {
             noteNum = noteNum_tmp - 21;
         }
 
-        console.log(noteNum);
+        console.log(noteNum_tmp);
 
         if (spheres[noteNum].material !== undefined) {
             spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
