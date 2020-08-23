@@ -5,8 +5,8 @@ const loading = document.getElementById("loading");
 
 btnStart.addEventListener("click", function () {
     loading.classList.add("on");
-    vrmDisplay()
     btnStart.classList.add("close");
+    vrmDisplay()
 });
 
 
