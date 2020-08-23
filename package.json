@@ -1,9 +1,9 @@
 {
-  "name": "@magenta/performance-rnn",
+  "name": "a-girl-in-the-box",
   "version": "1.0.0",
-  "description": "TensorFlow.js demo of PerformanceRNN - not actually published",
+  "description": "PerformanceRNN and Three.js and VRM",
   "main": "index.js",
-  "author": "Magenta",
+  "author": "Yohei-suda",
   "license": "Apache-2.0",
   "dependencies": {
     "@pixiv/three-vrm": "^0.3.6",
