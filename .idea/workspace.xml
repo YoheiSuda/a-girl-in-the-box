@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3accce56-f449-440a-8274-0bf35bac533c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/vrmDisplay.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vrmDisplay.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +53,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
     <property name="ts.external.directory.path" value="D:\artworks\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -63,6 +64,13 @@
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+    <option name="myConnectionType" value="NONE" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\f18ba\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="3accce56-f449-440a-8274-0bf35bac533c" name="Default Changelist" comment="" />
@@ -76,9 +84,17 @@
       <workItem from="1598150824451" duration="16838000" />
       <workItem from="1598178315402" duration="1232000" />
       <workItem from="1598396253475" duration="617000" />
-      <workItem from="1598397071044" duration="879000" />
+      <workItem from="1598397071044" duration="1181000" />
+      <workItem from="1598398317365" duration="114000" />
+      <workItem from="1598398482323" duration="191000" />
     </task>
     <servers />
+  </component>
+  <component name="TerminalProjectNonSharedOptionsProvider">
+    <envs>
+      <env key="LANG" value="ja_JP.UTF-8" />
+    </envs>
+    <option name="shellPath" value="C:\Program Files\PowerShell\6\pwsh.exe" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -91,6 +107,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="568" y="246" key="EditFileWatcherDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598084407095" />
+    <state x="805" y="212" key="EnvironmentVariablesDialog" timestamp="1598398422548">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="805" y="212" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598398422548" />
+    <state x="686" y="200" key="FileChooserDialogImpl" timestamp="1598398165715">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="686" y="200" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598398165715" />
     <state width="1865" height="267" key="GridCell.Tab.0.bottom" timestamp="1598084472651">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -107,9 +131,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1865" height="267" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598084472651" />
-    <state x="351" y="78" key="SettingsEditor" timestamp="1598077231195">
+    <state x="351" y="78" key="SettingsEditor" timestamp="1598398425349">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="351" y="78" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598077231195" />
+    <state x="351" y="78" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598398425349" />
   </component>
 </project>

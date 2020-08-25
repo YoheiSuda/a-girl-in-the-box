@@ -225,8 +225,6 @@ export default function () {
                 console.log(noteNum_tmp);
                 spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
                 spheres[noteNum].scale.x = spheres[noteNum].scale.y = spheres[noteNum].scale.z = Math.random() * 3 + 1;
-                spheres[noteNum].position.x = 3 * Math.cos(clock.elapsedTime * 0.1 * (noteNum - 43.5));
-                spheres[noteNum].position.y = 3 * Math.sin(clock.elapsedTime * 0.1 * (noteNum - 43.5));
             }
         }
 
