@@ -221,7 +221,7 @@ export default function () {
                 noteNum = noteNum_tmp - 21;
             }
 
-            if (spheres[noteNum].material !== undefined) {
+            if (frame % 10 === 0 && spheres[noteNum].material !== undefined) {
                 console.log(noteNum_tmp);
                 spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
                 spheres[noteNum].scale.x = spheres[noteNum].scale.y = spheres[noteNum].scale.z = Math.random() * 3 + 1;
