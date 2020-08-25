@@ -13,6 +13,8 @@ export default function () {
     const renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector("#Canvas")
     });
+    renderer.setPixelRatio(1);
+
 
     // camera
     const camera = new THREE.PerspectiveCamera(30.0, window.innerWidth / window.innerHeight, 0.1, 20.0);
@@ -177,9 +179,19 @@ export default function () {
     let rot = 0;
     let vrmFirstCheck = false;
 
+    let frame = 0;
+
     function animate() {
 
         requestAnimationFrame(animate);
+
+        frame++;
+
+        // フレーム数が２で割り切れなければ描画しない
+        if (frame % 3 === 0) {
+            return;
+        }
+
 
         const deltaTime = clock.getDelta();
 
@@ -236,8 +248,6 @@ export default function () {
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        // レンダラーのサイズを調整する
-        renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
 
         // カメラのアスペクト比を正す
