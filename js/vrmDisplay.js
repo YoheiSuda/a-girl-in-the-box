@@ -187,53 +187,51 @@ export default function () {
 
         frame++;
 
-        // フレーム数が２で割り切れなければ描画しない
-        if (frame % 3 === 0) {
-            return;
-        }
+        if (frame % 3 === 0 ) {
+            const deltaTime = clock.getDelta();
 
+            if (currentVrm) {
+                const s = 0.1 * Math.sin(Math.PI * clock.elapsedTime);
+                currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.LeftEye).rotation.y = s;
+                currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.RightEye).rotation.y = s;
+                currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.Chest).rotation.x = s * 0.1;
 
-        const deltaTime = clock.getDelta();
+                currentVrm.update(deltaTime);
 
-        if (currentVrm) {
-            const s = 0.1 * Math.sin(Math.PI * clock.elapsedTime);
-            currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.LeftEye).rotation.y = s;
-            currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.RightEye).rotation.y = s;
-            currentVrm.humanoid.getBoneNode(VRMSchema.HumanoidBoneName.Chest).rotation.x = s * 0.1;
+                if (vrmFirstCheck === false) {
+                    performance_rnn()
+                    loading.classList.remove('on');
+                    vrmFirstCheck = true;
+                }
 
-            currentVrm.update(deltaTime);
-
-            if (vrmFirstCheck === false) {
-                performance_rnn()
-                loading.classList.remove('on');
-                vrmFirstCheck = true;
             }
 
+            group.rotation.y = clock.elapsedTime * 0.1;
+            group.rotation.x = clock.elapsedTime * 0.1;
+
+            rot += 0.1;
+            const radian = (rot * Math.PI) / 180;
+            camera.position.x = 5 * Math.sin(radian);
+            camera.position.y = 5 * Math.cos(radian);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            let noteNum_tmp = parseInt(localStorage.getItem("noteNum"));
+
+            if (noteNum_tmp !== null && noteNum !== noteNum_tmp) {
+                noteNum = noteNum_tmp - 21;
+            }
+
+            if (spheres[noteNum].material !== undefined) {
+                console.log(noteNum_tmp);
+                spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
+                spheres[noteNum].scale.x = spheres[noteNum].scale.y = spheres[noteNum].scale.z = Math.random() * 3 + 1;
+                spheres[noteNum].position.x = 3 * Math.cos(clock.elapsedTime * 0.1 * (noteNum - 43.5));
+                spheres[noteNum].position.y = 3 * Math.sin(clock.elapsedTime * 0.1 * (noteNum - 43.5));
+            }
         }
 
-        group.rotation.y = clock.elapsedTime * 0.1;
-        group.rotation.x = clock.elapsedTime * 0.1;
 
-        rot += 0.1;
-        const radian = (rot * Math.PI) / 180;
-        camera.position.x = 5 * Math.sin(radian);
-        camera.position.y = 5 * Math.cos(radian);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        let noteNum_tmp = parseInt(localStorage.getItem("noteNum"));
-
-        if (noteNum_tmp !== null && noteNum !== noteNum_tmp) {
-            noteNum = noteNum_tmp - 21;
-        }
-
-        console.log(noteNum_tmp);
-
-        if (spheres[noteNum].material !== undefined) {
-            spheres[noteNum].material.color.setHex(Math.random() * 0xffffff);
-            spheres[noteNum].scale.x = spheres[noteNum].scale.y = spheres[noteNum].scale.z = Math.random() * 3 + 1;
-            spheres[noteNum].position.x = 3 * Math.cos(clock.elapsedTime * 0.1 * (noteNum - 43.5));
-            spheres[noteNum].position.y = 3 * Math.sin(clock.elapsedTime * 0.1 * (noteNum - 43.5));
-        }
 
         renderer.render(scene, camera);
     }
